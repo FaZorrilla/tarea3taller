@@ -8,12 +8,18 @@ const Chat = (props) => {
   const { messages, sendMessage } = useChat(); // Creates a websocket and manages messaging
   const [newMessage, setNewMessage] = React.useState(""); // Message to be sent
 
+  const [username, setUsername] = React.useState(""); //Nuevo username
+
+  const handleNewUsername = (event) => {
+    setUsername(event.target.value);
+  };
+
   const handleNewMessageChange = (event) => {
     setNewMessage(event.target.value);
   };
 
   const handleSendMessage = () => {
-    sendMessage(newMessage);
+    sendMessage(newMessage, username);
     setNewMessage("");
   };
 
@@ -21,14 +27,20 @@ const Chat = (props) => {
     <div className="chat-room-container">
       <h2>Chat Global</h2>
       <div className="messages-container">
-        <ol className="messages-list">
+        <ul className="messages-list">
           {messages.map((message, i) => (
             <li key={i} className={`message-item ${"received-message"}`}>
+              {message.name} ({new Date(message.date).toLocaleString()}):{" "}
               {message.message}
             </li>
           ))}
-        </ol>
+        </ul>
       </div>
+      <textarea
+        value={username}
+        onChange={handleNewUsername}
+        placeholder="Write username..."
+      />
       <textarea
         value={newMessage}
         onChange={handleNewMessageChange}

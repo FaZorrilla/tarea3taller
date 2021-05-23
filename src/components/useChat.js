@@ -27,7 +27,6 @@ const useChat = () => {
         ...message,
       };
       setMessages((messages) => [...messages, incomingMessage]);
-      console.log(incomingMessage);
     });
 
     // Destroys the socket reference
@@ -39,13 +38,12 @@ const useChat = () => {
 
   // Sends a message to the server that
   // forwards it to all users in the same room
-  const sendMessage = async (messageBody) => {
+  const sendMessage = async (messageBody, username) => {
     var a = await socketRef.current.emit(NEW_CHAT_MESSAGE_EVENT, {
-      name: "Pancho",
+      name: username,
       date: Date.now(),
       message: messageBody,
     });
-    console.log(a);
   };
 
   return { messages, sendMessage };
