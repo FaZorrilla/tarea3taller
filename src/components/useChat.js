@@ -4,8 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import socketIOClient from "socket.io-client";
 
 const NEW_CHAT_MESSAGE_EVENT = "CHAT"; // Name of the event
-const SOCKET_SERVER_URL =
-  "wss://tarea-3-websocket.2021-1.tallerdeintegracion.cl";
 
 const useChat = () => {
   const [messages, setMessages] = useState([]); // Sent and received messages
@@ -38,8 +36,8 @@ const useChat = () => {
 
   // Sends a message to the server that
   // forwards it to all users in the same room
-  const sendMessage = async (messageBody, username) => {
-    var a = await socketRef.current.emit(NEW_CHAT_MESSAGE_EVENT, {
+  const sendMessage = (messageBody, username) => {
+    socketRef.current.emit(NEW_CHAT_MESSAGE_EVENT, {
       name: username,
       date: Date.now(),
       message: messageBody,
