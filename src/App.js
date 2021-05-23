@@ -6,9 +6,15 @@ import { useState } from "react";
 function App() {
   return (
     <div className="Hola">
-      <Mapa title="Mapa En Vivo" />
-      <InfoVuelos />
-      <Chat />
+      <div>
+        <Mapa title="Mapa En Vivo" />
+      </div>
+      <div className="container">
+        <InfoVuelos />
+      </div>
+      <div className="container">
+        <Chat />
+      </div>
     </div>
   );
 }

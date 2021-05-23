@@ -4,7 +4,7 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
 const Mapa = (props) => {
   return (
-    <header>
+    <header height={500}>
       <h1>{props.title}</h1>
       <link
         rel="stylesheet"
@@ -17,7 +17,7 @@ const Mapa = (props) => {
         integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
         crossorigin=""
       ></script>
-      <div id="mapid" height={180}>
+      <div id="mapid">
         <MapContainer center={[0, 0]} zoom={1.5} scrollWheelZoom={false}>
           <TileLayer
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -28,6 +28,7 @@ const Mapa = (props) => {
               A pretty CSS3 popup. <br /> Easily customizable.
             </Popup>
           </Marker>
+          <h2>Esto parece que no funciona</h2>
         </MapContainer>
       </div>
     </header>
