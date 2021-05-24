@@ -30,6 +30,7 @@
   border: 1px solid steelblue;
   padding: 30px;
   border-radius: 5px;
+  resize: none;
 }
 
 .info-container {

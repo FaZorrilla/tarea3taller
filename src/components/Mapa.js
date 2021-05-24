@@ -18,14 +18,14 @@ const Mapa = (props) => {
         crossorigin=""
       ></script>
       <div id="mapid">
-        <MapContainer center={[0, 0]} zoom={1.5} scrollWheelZoom={false}>
+        <MapContainer center={[-30, -70]} zoom={1.7} scrollWheelZoom={false}>
           <TileLayer
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
           <Marker position={[0, 0]}>
             <Popup>
-              A pretty CSS3 popup. <br /> Easily customizable.
+              Aca se ve el codigo <br /> Easily customizable.
             </Popup>
           </Marker>
           <h2>Esto parece que no funciona</h2>
