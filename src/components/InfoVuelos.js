@@ -12,7 +12,6 @@ const InfoVuelos = (props) => {
     <div>
       <h2>Info Vuelos</h2>
       <ul className="messages-container">
-        {console.log(infoFlights)}
         {infoFlights.map((flight, i) => (
           <li key={i} className="info-container">
             <li>Code: {flight.code}</li>

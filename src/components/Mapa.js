@@ -1,8 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import useMapa from "./useMapa";
 
 const Mapa = (props) => {
+  const { infoPos } = useMapa(); // Creates a websocket and manages messaging
+
   return (
     <header height={500}>
       <h1>{props.title}</h1>
@@ -18,17 +21,16 @@ const Mapa = (props) => {
         crossorigin=""
       ></script>
       <div id="mapid">
-        <MapContainer center={[-30, -70]} zoom={1.7} scrollWheelZoom={false}>
+        <MapContainer center={[-30, -70]} zoom={3} scrollWheelZoom={false}>
           <TileLayer
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-          <Marker position={[0, 0]}>
-            <Popup>
-              Aca se ve el codigo <br /> Easily customizable.
-            </Popup>
-          </Marker>
-          <h2>Esto parece que no funciona</h2>
+          {infoPos.map((flight, i) => (
+            <Marker position={[flight.position[0], flight.position[1]]}>
+              <Popup>Code: {flight.code}</Popup>
+            </Marker>
+          ))}
         </MapContainer>
       </div>
     </header>

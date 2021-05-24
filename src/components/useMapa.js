@@ -4,7 +4,7 @@ import socketIOClient from "socket.io-client";
 const NEW_INFO_EVENT = "POSITION"; // Name of the event
 
 const useInfo = () => {
-  const [infoFlights, setInfo] = useState([]); // Sent and received messages
+  const [infoPos, setInfo] = useState([]); // Sent and received messages
   const socketRefMap = useRef();
 
   useEffect(() => {
@@ -18,8 +18,17 @@ const useInfo = () => {
     );
 
     // Listens for incoming messages
+
     socketRefMap.current.on(NEW_INFO_EVENT, (info) => {
-      setInfo([...info]);
+      const filtrado = infoPos.filter((flight) => flight.code === info.code);
+      console.log(filtrado);
+      if (!filtrado.length) {
+        setInfo([...infoPos, info]);
+      } else {
+        filtrado[0].position = info.position;
+        const otros = infoPos.filter((flight) => flight.code !== info.code);
+        setInfo([...otros, filtrado[0]]);
+      }
     });
 
     // Destroys the socket reference
@@ -27,13 +36,9 @@ const useInfo = () => {
     return () => {
       socketRefMap.current.disconnect();
     };
-  }, [infoFlights]);
+  }, [infoPos]);
 
-  const getPosition = () => {
-    socketRefMap.current.emit(NEW_INFO_EVENT, {});
-  };
-
-  return { infoFlights, getPosition };
+  return { infoPos };
 };
 
 export default useInfo;
